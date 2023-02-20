@@ -49,7 +49,7 @@ const authSlice = createSlice({
       loginUser.rejected,
       (state: IAuthState, action: PayloadAction<any>) => {
         state.isLoading = false;
-        state.message = "Erro ao fazer login!";
+        state.message = "Login error!";
       }
     );
 
@@ -80,6 +80,7 @@ const authSlice = createSlice({
       updateUser.fulfilled,
       (state: IAuthState, action: PayloadAction<any>) => {
         state.isLoading = false;
+        state.message = action?.payload?.message;
       }
     );
     builder.addCase(
