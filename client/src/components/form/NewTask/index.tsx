@@ -4,8 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, TextArea } from "../..";
 import { createProject } from "../../../redux/projects/projectActions";
 import { theme } from "../../../theme";
-import { Container, FormContainer, Text } from "./styles";
-import { FaPlusSquare } from "react-icons/fa";
+import {
+  Container,
+  ContainerInput,
+  FormContainer,
+  Text,
+  Wrapper,
+} from "./styles";
+import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
 import { createTask } from "../../../redux/projects/taskAction";
 import { getProject } from "../../../redux/projects/projectSlice";
 import { ITask } from "../../../@types/task";
@@ -36,7 +42,9 @@ export const NewTask = ({
   };
 
   const handleAddForm = () => {
-    setTasks({ tasks: [...tasks.tasks, {}] });
+    if (tasks.tasks.length < 2) {
+      setTasks({ tasks: [...tasks.tasks, {}] });
+    }
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -54,6 +62,12 @@ export const NewTask = ({
     }
   };
 
+  const handleRemoveForm = (index: number) => {
+    const newTasks: any = [...tasks.tasks];
+    newTasks.splice(index, 1);
+    setTasks({ tasks: newTasks });
+  };
+
   const renderForms = () => {
     return tasks.tasks.map((task, index) => {
       return (
@@ -64,12 +78,18 @@ export const NewTask = ({
             text="Task name"
             type="text"
             name="name"
-            width="300px"
+            width="250px"
             value={task.name || ""}
             handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleChange(e, index)
             }
           />
+          <ContainerInput
+            align="center"
+            justify="center"
+            direction="row"
+          ></ContainerInput>
+
           <TextArea
             text="Task Description"
             name="description"
@@ -80,7 +100,18 @@ export const NewTask = ({
             handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleChange(e, index)
             }
-            width="300px"
+            width="250px"
+          />
+          <Button
+            Icon={FaMinusSquare}
+            onClick={() => handleRemoveForm(index)}
+            width="32px"
+            height="32px"
+            iconHeight="24px"
+            iconWidth="24px"
+            primaryColor={theme?.font?.colors?.white}
+            hoverColor={theme?.colors?.dark?.pure}
+            backgroundColor={theme?.colors?.background[1]}
           />
         </FormContainer>
       );
@@ -88,20 +119,21 @@ export const NewTask = ({
   };
 
   return (
-    <Container align="center" direction="column" justify="center">
+    <Wrapper align="center" direction="column" justify="center">
       <Text>Create a new Task</Text>
-      <Container align="center" direction="column" justify="center">
-        <Button
-          Icon={FaPlusSquare}
-          onClick={handleAddForm}
-          width="32px"
-          height="32px"
-          iconHeight="24px"
-          iconWidth="24px"
-          primaryColor={theme?.font?.colors?.white}
-          hoverColor={theme?.colors?.dark?.pure}
-          backgroundColor={theme?.colors?.background[1]}
-        />
+      <Button
+        Icon={FaPlusSquare}
+        onClick={handleAddForm}
+        width="32px"
+        height="32px"
+        iconHeight="24px"
+        iconWidth="24px"
+        cursor={tasks?.tasks?.length === 2 ? "not-allowed" : "pointer"}
+        primaryColor={theme?.font?.colors?.white}
+        hoverColor={theme?.colors?.dark?.pure}
+        backgroundColor={theme?.colors?.background[1]}
+      />
+      <Container align="center" direction="row" justify="center">
         {renderForms()}
       </Container>
 
@@ -112,6 +144,6 @@ export const NewTask = ({
         hoverColor={theme?.colors?.dark?.pure}
         backgroundColor={theme?.colors?.background[1]}
       />
-    </Container>
+    </Wrapper>
   );
 };
