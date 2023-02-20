@@ -8,6 +8,7 @@ export const Container = styled(FlexBox)`
 
 export const ContainerButton = styled(FlexBox)`
   padding: 1rem;
+  gap: 1rem;
 `;
 
 export const TaskContainer = styled(FlexBox)`

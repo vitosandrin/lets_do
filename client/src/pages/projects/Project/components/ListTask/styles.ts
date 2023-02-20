@@ -15,6 +15,7 @@ export const TaskContainer = styled(FlexBox)`
   position: relative;
   top: 0;
   width: 33%;
+  min-width: 220px;
   padding: 1rem;
   gap: 0.5rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,7 +28,7 @@ export const TaskTitle = styled.span`
 
 export const ContentList = styled(FlexBox)`
   padding: 0.5rem;
-  padding: 0.5rem;
+  margin: 0.5rem;
   box-shadow: 0px 2px 4px ${({ theme }) => theme?.colors?.dark[4]};
 `;
 
@@ -55,5 +56,5 @@ export const Text = styled.p`
 
 export const ContainerButton = styled(FlexBox)`
   gap: 0.2rem;
-  max-width: 32px;
+  max-width: 30px;
 `;
