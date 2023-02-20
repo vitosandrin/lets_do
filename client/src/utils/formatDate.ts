@@ -12,3 +12,12 @@ export const formatDateWithHour = (dateString: string) => {
   const formattedDate = format(date, "dd/MM/yyyy HH:mm");
   return formattedDate;
 };
+
+export const dateToDb = (dateString: string) => {
+  const formattedDate = format(
+    new Date(dateString),
+    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+  );
+
+  return formattedDate;
+};
