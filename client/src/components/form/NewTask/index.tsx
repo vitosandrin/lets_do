@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { Input, Button, TextArea } from "../..";
+import { Input, Button, TextArea, Select } from "../..";
 import { createProject } from "../../../redux/projects/projectActions";
 import { theme } from "../../../theme";
 import {
@@ -84,11 +84,36 @@ export const NewTask = ({
               handleChange(e, index)
             }
           />
-          <ContainerInput
-            align="center"
-            justify="center"
-            direction="row"
-          ></ContainerInput>
+          <ContainerInput align="center" justify="center" direction="row">
+            <Input
+              primaryColor={theme?.font?.colors?.dark}
+              fontSize="0.6rem"
+              text="Schedule task"
+              type="date"
+              name="scheduleAt"
+              width="150px"
+              value={task.scheduleAt || ""}
+              handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e, index)
+              }
+            />
+            <Select
+              name="priority"
+              text="Priority"
+              handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e, index)
+              }
+              value={task?.priority! || ""}
+              options={[
+                { value: "high", label: "High" },
+                { value: "median", label: "Median" },
+                { value: "low", label: "Low" },
+              ]}
+              primaryColor={theme?.font?.colors?.dark}
+              fontSize="0.6rem"
+              width="100px"
+            />
+          </ContainerInput>
 
           <TextArea
             text="Task Description"
@@ -117,7 +142,7 @@ export const NewTask = ({
       );
     });
   };
-
+  console.log(tasks);
   return (
     <Wrapper align="center" direction="column" justify="center">
       <Text>Create a new Task</Text>

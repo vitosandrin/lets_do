@@ -1,7 +1,8 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { useState, useEffect } from "react";
+import { FaBatteryFull, FaBatteryHalf, FaBatteryQuarter } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Input, TextArea } from "../../../../../components";
+import { Button, Input, Label, TextArea } from "../../../../../components";
 import {
   getProject,
   getTask,
@@ -12,6 +13,10 @@ import {
   updateTask,
 } from "../../../../../redux/projects/taskAction";
 import { theme } from "../../../../../theme";
+import {
+  formatDate,
+  formatDateWithHour,
+} from "../../../../../utils/formatDate";
 import { Container, ContainerData, Paragraph, Text } from "./styles";
 
 export const TaskDetail = ({
@@ -29,6 +34,43 @@ export const TaskDetail = ({
     await dispatch(getOneTask({ project: project?._id!, task: taskId! }));
   };
 
+  const renderPriority = () => {
+    switch (task?.priority) {
+      case "high":
+        return (
+          <Label
+            text="High priority"
+            Icon={FaBatteryFull}
+            fontSize="0.7rem"
+            primaryColor={theme?.font?.colors?.dark}
+            backgroundColor={theme?.colors?.feedback?.error}
+          />
+        );
+      case "median":
+        return (
+          <Label
+            text="Median priority"
+            fontSize="0.7rem"
+            Icon={FaBatteryHalf}
+            primaryColor={theme?.font?.colors?.dark}
+            backgroundColor={theme?.colors?.feedback?.warning}
+          />
+        );
+      case "low":
+        return (
+          <Label
+            text="Low priority"
+            fontSize="0.7rem"
+            Icon={FaBatteryQuarter}
+            primaryColor={theme?.font?.colors?.dark}
+            backgroundColor={theme?.colors?.feedback?.info}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   useEffect(() => {
     getOne();
     return () => {
@@ -40,7 +82,19 @@ export const TaskDetail = ({
     <Container align="center" justify="center" direction="column">
       <ContainerData align="center" justify="center" direction="column">
         <Text>{task?.name}</Text>
-        <Paragraph>{task?.description}</Paragraph>
+        {renderPriority()}
+        <Paragraph weight="300">{task?.description}</Paragraph>
+        <ContainerData align="center" justify="center" direction="row">
+          {task?.createdAt && (
+            <Paragraph>Created at: {formatDate(task?.createdAt!)}</Paragraph>
+          )}
+          {task?.updatedAt && (
+            <Paragraph>Updated at: {formatDate(task?.updatedAt!)}</Paragraph>
+          )}
+          {task?.scheduleAt && (
+            <Paragraph>Schedule at: {formatDate(task?.scheduleAt!)}</Paragraph>
+          )}
+        </ContainerData>
         {task?.completed === true ? (
           <Paragraph background={theme?.colors?.feedback?.success}>
             Task completed!

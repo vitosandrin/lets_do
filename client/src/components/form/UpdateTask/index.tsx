@@ -1,18 +1,15 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Input, TextArea } from "../../../components";
+import { Button, Input, Select, TextArea } from "../../../components";
 import {
   getProject,
   getTask,
   removeSingleTask,
 } from "../../../redux/projects/projectSlice";
-import {
-  getOneTask,
-  updateTask,
-} from "../../../redux/projects/taskAction";
+import { getOneTask, updateTask } from "../../../redux/projects/taskAction";
 import { theme } from "../../../theme";
-import { Container, ContainerData } from "./styles";
+import { Container, ContainerData, ContainerInput } from "./styles";
 
 export const UpdateTask = ({
   taskId,
@@ -68,8 +65,34 @@ export const UpdateTask = ({
           fontSize="0.6em"
           value={newTask?.name || ""}
           handleOnChange={handleChange}
-          width="300px"
+          width="250px"
         />
+        <ContainerInput align="center" justify="center" direction="row">
+          <Input
+            primaryColor={theme?.font?.colors?.dark}
+            fontSize="0.6rem"
+            text="Schedule task"
+            type="date"
+            name="scheduleAt"
+            width="150px"
+            value={newTask?.scheduleAt || ""}
+            handleOnChange={handleChange}
+          />
+          <Select
+            name="priority"
+            text="Priority"
+            handleOnChange={handleChange}
+            value={newTask?.priority! || ""}
+            options={[
+              { value: "high", label: "High" },
+              { value: "median", label: "Median" },
+              { value: "low", label: "Low" },
+            ]}
+            primaryColor={theme?.font?.colors?.dark}
+            fontSize="0.6rem"
+            width="100px"
+          />
+        </ContainerInput>
         <TextArea
           text="Task Description"
           name="description"
@@ -78,7 +101,7 @@ export const UpdateTask = ({
           fontSize="0.6em"
           value={newTask?.description || ""}
           handleOnChange={handleChange}
-          width="300px"
+          width="250px"
         />
         <Button
           text="Update"
