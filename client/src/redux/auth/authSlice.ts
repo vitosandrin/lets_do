@@ -25,7 +25,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = {};
       state.token = null;
-      state.message = "Logout realizado com sucesso!";
+      state.message = "Logout successfully!";
     },
     clearMessage: (state: IAuthState) => {
       state.message = "";
