@@ -24,7 +24,7 @@ class Projects {
     const { body, user } = req;
 
     if (!body.name) {
-      response(res, 404, "Informe o nome do projeto!");
+      response(res, 404, "Inform the name of your project");
       return;
     }
 
@@ -37,7 +37,7 @@ class Projects {
     try {
       const project = await this.project.create(req, data);
 
-      response(res, 201, "Projeto criado com sucesso!", project);
+      response(res, 201, "Project created successfully!", project);
     } catch (error) {
       console.log(error);
       response(res, 502);
@@ -50,7 +50,7 @@ class Projects {
     const project = await this.project.findOne(req, { _id: params.id });
 
     if (!project) {
-      response(res, 404, "Projeto não encontrado!");
+      response(res, 404, "Project not found!");
       return;
     }
 
@@ -62,7 +62,7 @@ class Projects {
     try {
       await this.project.update(req, { _id: params.id }, data);
 
-      response(res, 200, "Projeto atualizado com sucesso!");
+      response(res, 200, "Project updated successfully!");
     } catch (error) {
       console.log(error);
       response(res, 502);
@@ -95,7 +95,7 @@ class Projects {
     try {
       const project = await this.project.findOne(req, where);
       if (!project) {
-        response(res, 404, "Projeto não encontrado!", project);
+        response(res, 404, "Project not found!", project);
         return;
       }
       response(res, 200, "OK", project);
@@ -111,7 +111,7 @@ class Projects {
       for (let p of body.projects) {
         const project = await this.project.findOne(req, { _id: p._id });
         if (!project) {
-          response(res, 404, `Project id:'${p._id}' não encontrado!`);
+          response(res, 404, `Project id:'${p._id}' not found!`);
           return;
         }
         await this.project.remove(req, { _id: p._id });
@@ -120,7 +120,7 @@ class Projects {
       response(
         res,
         200,
-        `${body.projects.length} projetos excluidos com sucesso!!`
+        `${body.projects.length} projects excluded successfully!!`
       );
     } catch (error) {
       console.log(error);
@@ -132,7 +132,7 @@ class Projects {
     const { body, params } = req;
 
     if (!params.id) {
-      response(res, 404, "Informe o projeto!");
+      response(res, 404, "Inform the project _id!");
       return;
     }
 
@@ -142,6 +142,10 @@ class Projects {
           name: t.name,
           description: t.description,
           completed: false,
+          priority: t.priority,
+          scheduleAt: t.schedule,
+          createdAt: Date.now(),
+          updateAt: Date.now(),
         });
       }
 
@@ -156,7 +160,7 @@ class Projects {
     const { params } = req;
 
     if (!params.id) {
-      response(res, 404, "Informe o projeto!");
+      response(res, 404, "Inform the project _id!");
       return;
     }
 
@@ -180,6 +184,9 @@ class Projects {
     const data = {
       name: body.name ? body.name : undefined,
       description: body.description ? body.description : undefined,
+      priority: body.priority ? body.priority : undefined,
+      scheduleAt: body.schedule ? body.schedule : undefined,
+      updateAt: Date.now(),
     };
 
     try {
@@ -189,7 +196,7 @@ class Projects {
         `tasks._id:${params.task}`,
         data
       );
-      response(res, 200, "Task atualizada com sucesso!", task);
+      response(res, 200, "Task updated successfully!", task);
     } catch (error) {
       response(res, 502);
     }
@@ -206,7 +213,7 @@ class Projects {
           `tasks._id:${t._id}`
         );
       }
-      response(res, 200, `${body.tasks.length} tasks excluídas com sucesso!`);
+      response(res, 200, `${body.tasks.length} tasks excluded successfully!`);
     } catch (error) {
       response(res, 502);
     }
@@ -229,7 +236,7 @@ class Projects {
           { completed: !task?.data?.completed }
         );
       }
-      response(res, 200, `${body.tasks.length} tasks atualizadas com sucesso!`);
+      response(res, 200, `${body.tasks.length} tasks updated successfully!`);
     } catch (error) {
       response(res, 502);
     }

@@ -1,10 +1,19 @@
 import { model, Schema, Types } from "mongoose";
 import IUser from "./users";
+
+enum TaskPriority {
+  High = "high",
+  Median = "median",
+  Low = "low",
+}
+
 interface ITask {
   _id?: Types.ObjectId;
   name: string;
   description: string;
+  priority: TaskPriority;
   completed?: boolean;
+  scheduleAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -34,7 +43,12 @@ const schema = new Schema<IProject>(
       {
         name: String,
         description: String,
+        priority: {
+          type: String,
+          enum: [TaskPriority.High, TaskPriority.Median, TaskPriority.Low],
+        },
         completed: Boolean,
+        scheduleAt: Date,
         createdAt: Date,
         updatedAt: Date,
       },
