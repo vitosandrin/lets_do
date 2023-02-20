@@ -149,7 +149,7 @@ class Projects {
         });
       }
 
-      response(res, 201, `${body.tasks.length} tasks criada com sucesso!`);
+      response(res, 201, `${body.tasks.length} tasks created successfully!`);
     } catch (error) {
       console.log(error);
       response(res, 502);
