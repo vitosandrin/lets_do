@@ -24,8 +24,5 @@ export const InputStyle = styled.input`
   border-radius: 5px;
   height: ${(props) => props.height || "30px"};
   width: ${(props) => props.width || "200px"};
-  padding: 1em;
-  // ::placeholder {
-  //   color: #7b7b7b;
-  // }
+  padding: 0.4rem;
 `;

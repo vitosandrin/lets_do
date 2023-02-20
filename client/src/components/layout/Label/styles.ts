@@ -36,8 +36,8 @@ export const Container = styled.div<IContainerLabelProps>`
 
   > svg {
     color: ${(props) => props?.iconColor};
-    height: 100px;
-    width: 100px;
+    height: 25px;
+    width: 25px;
   }
   &:hover {
     background-color: ${(props) => props?.hoverColor};

@@ -29,7 +29,7 @@ export const Label: FC<ILabelProps> = ({
   borderRadius,
   fontSize,
   gap,
-  iconColor
+  iconColor,
 }) => {
   return (
     <Container
