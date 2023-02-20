@@ -11,10 +11,11 @@ import { Label } from "./layout/Label";
 import { Container } from "./utils/Container";
 import { FlexBox } from "./utils/Flexbox";
 import { Input } from "./form/Input";
+import { Select } from "./form/Select";
 import { TextArea } from "./form/TextArea";
 import { NewProject } from "./form/NewProject";
 import { UpdateProject } from "./form/UpdateProject";
-import { UpdateTask} from "./form/UpdateTask";
+import { UpdateTask } from "./form/UpdateTask";
 import { NewTask } from "./form/NewTask";
 export {
   Sidebar,
@@ -25,6 +26,7 @@ export {
   Container,
   FlexBox,
   Input,
+  Select,
   Table,
   Grid,
   Label,

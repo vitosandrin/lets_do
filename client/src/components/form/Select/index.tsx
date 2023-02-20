@@ -1,37 +1,50 @@
+import { Label, Form, InputStyle } from "./styles";
 import { FC } from "react";
-import styles from "./styles.module.css";
 
 interface ISelectProps {
-  text?: string;
   name?: string;
-  options?: any[];
+  text?: string;
   handleOnChange?: React.ChangeEventHandler;
   value?: string;
+  options: { value: string; label: string }[];
+  primaryColor: string;
+  fontSize: string;
+  height?: string;
+  width?: string;
 }
 
 export const Select: FC<ISelectProps> = ({
-  text,
   name,
-  options,
+  text,
   handleOnChange,
   value,
+  options,
+  primaryColor,
+  fontSize,
+  height,
+  width,
 }) => {
   return (
-    <div className={styles.form_control}>
-      <label htmlFor={name}>{text}:</label>
-      <select
+    <Form>
+      <Label htmlFor={name} fontSize={fontSize} primaryColor={primaryColor}>
+        {text}:
+      </Label>
+      <InputStyle
+        as="select"
         name={name}
         id={name}
         onChange={handleOnChange}
-        value={value || ""}
+        value={value}
+        width={width}
+        height={height}
+        primaryColor={primaryColor}
       >
-        <option>Selecione uma opção</option>
-        {options!.map((option) => (
-          <option value={option} key={option}>
-            {option}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
-      </select>
-    </div>
+      </InputStyle>
+    </Form>
   );
 };

@@ -1,19 +1,36 @@
-import styled from 'styled-components'
-import { FlexBox } from '../../utils/Flexbox';
+import styled from "styled-components";
+import { FlexBox } from "../../utils/Flexbox";
 
-export const Container = styled(FlexBox)``
-// .form_control {
-//     display: flex;
-//     flex-direction: column;
-//     margin-bottom: 1em;
+interface ILabelProps {
+  primaryColor?: string;
+  fontSize?: string;
+}
 
-// }
-// .form_control label {
-//     margin-bottom: .6em;
-//     font-weight: bold;
-// }
-// .form_control select {
-//     padding: .7em;
-//     border: 1px solid #777;
-//     border-radius: 5px;
-// }
+interface IInputProps {
+  primaryColor?: string;
+  height?: string;
+  width?: string;
+}
+
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  aling-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+`;
+
+export const Label = styled.label<ILabelProps>`
+  margin-bottom: 0.3em;
+  font-weight: normal;
+  font-size: ${(props) => props?.fontSize};
+  color: ${(props) => props?.primaryColor};
+`;
+
+export const InputStyle = styled.input<IInputProps>`
+  border-radius: 5px;
+  color: ${(props) => props.primaryColor}
+  height: ${(props) => props.height || "30px"};
+  width: ${(props) => props.width || "200px"};
+  padding: 0.3rem;
+`;
