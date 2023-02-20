@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button, Input } from "../../../components";
-import { Container, FormContainer, Text } from "./styles";
+import { Container, FormContainer, Paragraph, Text } from "./styles";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../redux/auth/authActions";
 import { theme } from "../../../theme";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../../@types/user";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [user, setUser] = useState<IUser>({
@@ -80,6 +81,10 @@ export const Register = () => {
           hoverColor={theme?.colors?.feedback?.success}
           backgroundColor={theme?.colors?.feedback?.successhover}
         />
+        <Paragraph>
+          Have an account?
+          <Link to={"/login"}> Sign in</Link>
+        </Paragraph>
       </FormContainer>
     </Container>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Input, ToastMessage } from "../../../components";
-import { Container, FormContainer, Text } from "./styles";
+import { Container, FormContainer, Paragraph, Text } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../redux/auth/authActions";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import {
   hideMessage,
   showMessage,
 } from "../../../redux/toastMessage/toastMessageSlice";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [user, setUser] = useState<IUser>({
@@ -67,6 +68,10 @@ export const Login = () => {
           hoverColor={theme?.colors?.feedback?.success}
           backgroundColor={theme?.colors?.feedback?.successhover}
         />
+        <Paragraph>
+          Don't have an account?
+          <Link to={"/register"}> Sign up</Link>
+        </Paragraph>
       </FormContainer>
     </Container>
   );

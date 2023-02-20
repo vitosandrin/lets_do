@@ -27,3 +27,17 @@ export const Text = styled.h1`
   text-align: center;
   color: ${({ theme }) => theme?.font?.colors?.white};
 `;
+
+export const Paragraph = styled.p`
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: lightner;
+  color: ${({ theme }) => theme.font.colors.white};
+  > a {
+    font-weight: bold;
+    color: ${({ theme }) => theme?.colors?.feedback?.successhover};
+    :hover {
+      color: ${({ theme }) => theme?.colors?.feedback?.success};
+    }
+  }
+`;
