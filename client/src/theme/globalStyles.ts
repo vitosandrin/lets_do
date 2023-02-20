@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import 'typeface-roboto';
 
 export const ResetCss = createGlobalStyle`
   html,
