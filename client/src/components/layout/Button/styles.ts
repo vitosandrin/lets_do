@@ -20,6 +20,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   text-align: center;
   display: flex;
 
+  padding: 0.2rem;
   border-style: none;
   border-width: 0px;
   border-radius: ${(props) => props?.borderRadius || "0.3rem"};
