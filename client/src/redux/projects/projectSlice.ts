@@ -11,7 +11,7 @@ import {
   removeProject,
   updateProject,
 } from "./projectActions";
-import { createTask, getOneTask, removeTask } from "./taskAction";
+import { createTask, getOneTask, removeTask, updateTask } from "./taskAction";
 import { ITask } from "../../@types/task";
 export interface IProjectState {
   projects: IProject[];
@@ -123,6 +123,23 @@ const projectSlice = createSlice({
       }
     );
 
+    builder.addCase(updateTask.pending, (state: IProjectState) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      updateTask.fulfilled,
+      (state: IProjectState, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.message = action?.payload?.message;
+      }
+    );
+    builder.addCase(
+      updateTask.rejected,
+      (state: IProjectState, action: PayloadAction<any>) => {
+        state.isLoading = false;
+      }
+    );
+
     builder.addCase(removeTask.pending, (state: IProjectState) => {
       state.isLoading = true;
     });
@@ -205,6 +222,7 @@ export const getTask = (state: { project: IProjectState }) =>
 export const getMessage = (state: { project: IProjectState }): string | null =>
   state.project.message;
 
-export const { removeSingleProject, clearMessage, removeSingleTask } = projectSlice.actions;
+export const { removeSingleProject, clearMessage, removeSingleTask } =
+  projectSlice.actions;
 
 export default projectSlice.reducer;
