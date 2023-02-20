@@ -6,7 +6,7 @@ import { Input, Button } from "../../components";
 import { updateUser } from "../../redux/auth/authActions";
 import { getUser } from "../../redux/auth/authSlice";
 import { theme } from "../../theme";
-import { Container } from "./styles";
+import { Container, Text, Wrapper } from "./styles";
 
 export const User = () => {
   const user = useSelector(getUser);
@@ -29,25 +29,49 @@ export const User = () => {
   };
 
   return (
-    <Container align="center" justify="center" direction="row">
-      <Input
-        text="Name"
-        type="text"
-        name="name"
-        fontSize="0.7em"
-        primaryColor={theme?.font?.colors?.dark}
-        placeholder="Your name"
-        handleOnChange={handleChange}
-      />
-      <Input
-        text="E-mail"
-        type="email"
-        name="email"
-        primaryColor={theme?.font?.colors?.dark}
-        placeholder="Your e-mail"
-        fontSize="0.7em"
-        handleOnChange={handleChange}
-      />
+    <Wrapper align="center" justify="center" direction="column">
+      <Text>Manage your account!</Text>
+      <Container align="center" justify="center" direction="row">
+        <Input
+          text="Name"
+          type="text"
+          name="name"
+          fontSize="0.7em"
+          primaryColor={theme?.font?.colors?.dark}
+          placeholder="Your name"
+          handleOnChange={handleChange}
+        />
+        <Input
+          text="E-mail"
+          type="email"
+          name="email"
+          primaryColor={theme?.font?.colors?.dark}
+          placeholder="Your e-mail"
+          fontSize="0.7em"
+          handleOnChange={handleChange}
+        />
+      </Container>
+      <Container align="center" justify="center" direction="row">
+        <Input
+          text="Password"
+          type="password"
+          name="password"
+          fontSize="0.7em"
+          primaryColor={theme?.font?.colors?.dark}
+          placeholder="Your password"
+          handleOnChange={handleChange}
+        />
+        <Input
+          text="Confirm password"
+          type="password"
+          name="rePassword"
+          primaryColor={theme?.font?.colors?.dark}
+          placeholder="Confirm your password"
+          fontSize="0.7em"
+          handleOnChange={handleChange}
+        />
+      </Container>
+
       <Button
         text="Update user"
         onClick={handleSubmit}
@@ -55,6 +79,6 @@ export const User = () => {
         hoverColor={theme?.colors?.dark?.pure}
         backgroundColor={theme?.colors?.background[1]}
       />
-    </Container>
+    </Wrapper>
   );
 };
