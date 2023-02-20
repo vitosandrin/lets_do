@@ -143,7 +143,7 @@ class Projects {
           description: t.description,
           completed: false,
           priority: t.priority,
-          scheduleAt: t.schedule,
+          scheduleAt: t.scheduleAt,
           createdAt: Date.now(),
           updateAt: Date.now(),
         });
@@ -185,8 +185,8 @@ class Projects {
       name: body.name ? body.name : undefined,
       description: body.description ? body.description : undefined,
       priority: body.priority ? body.priority : undefined,
-      scheduleAt: body.schedule ? body.schedule : undefined,
-      updateAt: Date.now(),
+      scheduleAt: body.scheduleAt ? body.scheduleAt : undefined,
+      updatedAt: Date.now(),
     };
 
     try {
@@ -233,7 +233,7 @@ class Projects {
           req,
           { _id: params.id },
           `tasks._id:${t._id}`,
-          { completed: !task?.data?.completed }
+          { completed: !task?.data?.completed, updatedAt: Date.now() }
         );
       }
       response(res, 200, `${body.tasks.length} tasks updated successfully!`);
