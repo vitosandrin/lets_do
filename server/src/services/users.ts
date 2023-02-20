@@ -18,31 +18,31 @@ class Users {
     const { body } = req;
     try {
       if (!body.name) {
-        response(res, 422, "Informe o nome que seja cadastrar");
+        response(res, 422, "Inform the name!");
         return;
       }
       if (!body.email) {
-        response(res, 422, "Informe o email que seja cadastrar");
+        response(res, 422, "Inform your e-mail!");
         return;
       }
 
       const userExist = await this.user.findOne(req, { email: body?.email });
       if (userExist) {
-        response(res, 422, "Email já cadastrado no sistema");
+        response(res, 422, "E-mail already registered");
         return;
       }
 
       if (!body.password) {
-        response(res, 422, "Informe a senha que seja cadastrar");
+        response(res, 422, "Inform the password");
         return;
       }
       if (!body.rePassword) {
-        response(res, 422, "Informe confirmação da senha que seja cadastrar");
+        response(res, 422, "Confirm your password");
         return;
       }
 
       if (body.password !== body.rePassword) {
-        response(res, 422, "A senha e a confirmação da senha não conferem!");
+        response(res, 422, "Password and password confirmation doesn't match!");
         return;
       }
 
@@ -56,7 +56,7 @@ class Users {
       user.password = undefined;
       const token = await createToken(user, req);
 
-      response(res, 201, "Usuário criado com sucesso!", { user, token });
+      response(res, 201, "User registered successfully!", { user, token });
     } catch (error) {
       console.log(error);
       response(res, 502);
@@ -67,11 +67,11 @@ class Users {
     const { body } = req;
 
     if (!body.email) {
-      response(res, 422, "Informe o email para fazer login");
+      response(res, 422, "Provide email to login");
       return;
     }
     if (!body.password) {
-      response(res, 422, "Informe a senha para fazer login");
+      response(res, 422, "Provide password to login");
       return;
     }
 
@@ -81,14 +81,14 @@ class Users {
         password: md5(body.password),
       });
       if (!user) {
-        response(res, 401, "E-mail ou senha inválidos!");
+        response(res, 401, "Invalid email or password!");
         return;
       }
 
       const token = await createToken(user, req);
       user.password = undefined;
 
-      return response(res, 200, "Login realizado com sucesso!", {
+      return response(res, 200, "Successful login!", {
         user,
         token,
       });
@@ -115,7 +115,7 @@ class Users {
       user.password = undefined;
 
       if (!user) {
-        response(res, 404, "Usuário não encontrado!");
+        response(res, 404, "User not found!");
         return;
       }
 
@@ -131,13 +131,13 @@ class Users {
 
     const user = await this.user.findOne(req, { _id: params?.id });
     if (!user) {
-      response(res, 404, "Usuário não encontrado!");
+      response(res, 404, "User not found!");
       return;
     }
     try {
       await this.user.remove(req, { _id: params.id });
 
-      response(res, 200, `Usuário excluido com sucesso!`, user);
+      response(res, 200, `User excluded successfully!`, user);
     } catch (error) {
       console.log(error);
       response(res, 502);
@@ -150,18 +150,23 @@ class Users {
     const user = await this.user.findOne(req, { _id: params.id });
 
     if (!user) {
-      response(res, 404, "Usuario não encontrado!");
+      response(res, 404, "User not found!");
       return;
     }
 
+    if (body?.password !== body?.rePassword) {
+      response(res, 401, "Password and confirm password doesn't match!");
+      return;
+    }
     const data = {
       name: body.name ? body.name : undefined,
       email: body.email ? body.email : undefined,
+      password: body.password ? md5(body?.password) : undefined,
     };
 
     try {
       await this.user.update(req, { _id: params.id }, data);
-      response(res, 200, "Usuario atualizado com sucesso!");
+      response(res, 200, "User updated successfully!");
     } catch (error) {
       console.log(error);
       response(res, 502);
