@@ -152,7 +152,7 @@ export default (model: Model<any>, defaultOptions: IDefaultOptions = {}) => {
     findAll,
     remove,
     update,
-
+    uuid,
     createPath,
     updatePath,
     removePath,

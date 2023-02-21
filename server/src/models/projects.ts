@@ -21,7 +21,7 @@ export default interface IProject {
   _id?: Types.ObjectId;
   name: string;
   description: string;
-  user: IUser;
+  user: IUser[];
   tasks: ITask[];
   createdAt?: Date;
   updatedAt?: Date;
@@ -35,10 +35,12 @@ const schema = new Schema<IProject>(
     description: {
       type: String,
     },
-    user: {
-      type: Types.ObjectId,
-      ref: "users",
-    },
+    user: [
+      {
+        type: Types.ObjectId,
+        ref: "users",
+      },
+    ],
     tasks: [
       {
         name: String,
@@ -62,6 +64,7 @@ const schema = new Schema<IProject>(
   },
   {
     timestamps: true,
+    strict: "throw",
   }
 );
 
