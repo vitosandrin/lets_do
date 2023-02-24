@@ -64,7 +64,6 @@ const schema = new Schema<IProject>(
   },
   {
     timestamps: true,
-    strict: "throw",
   }
 );
 
