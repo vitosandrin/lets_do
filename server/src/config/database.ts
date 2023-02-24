@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 dotenv.config();
 
-const { MONGO_HOST ,MONGO_DATABASE, MONGO_PASS, MONGO_USER } = process.env;
+const { MONGO_HOST, MONGO_DATABASE, MONGO_PORT } = process.env;
 
-const MONGO_URI =`mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DATABASE}`;
+const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`;
 
 mongoose
   .connect(MONGO_URI, {
