@@ -75,10 +75,11 @@ export default (model: Model<any>, defaultOptions: IDefaultOptions = {}) => {
     };
   };
 
-  const findOne = async (req: any = {}, query: any = {}, ...props: any) => {
+
+  const findOne = async (req = {}, query = {}, ...props: any) => {
     const populate = defaultOptions.populate;
 
-    return model.findOne(query, ...props).then(async (data: any) => {
+    return model.findOne(query, ...props).then(async (data) => {
       const newData = populate ? await populate(data) : data;
 
       return newData ? newData.toObject() : newData;
@@ -111,11 +112,10 @@ export default (model: Model<any>, defaultOptions: IDefaultOptions = {}) => {
   const createPath = async (req = {}, query = {}, path = "", data = {}) => {
     const document = await findOne(req, query);
 
-    const updatedDocument = createItemFromPath(
-      document,
-      path,
-      removeUndefined(data)
-    );
+    console.log("document haha", document);
+
+    const updatedDocument = createItemFromPath(document, path, removeUndefined(data));
+    console.log("updated Document", updatedDocument);
 
     await update(req, query, updatedDocument);
 

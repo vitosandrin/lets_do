@@ -52,6 +52,9 @@ export const createItemFromPath = (document: any, path: any, data: any) => {
   const currentData = R.path(newPath, document) || [];
 
   const newData = R.append(data, currentData);
+  console.log("newdata", newData);
+
+  console.log("newdata with R", R.assocPath(newPath, newData, document));
 
   return R.assocPath(newPath, newData, document);
 };
