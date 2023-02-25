@@ -11,9 +11,6 @@ router.get("/:id/task/:task", service.findOneTask);
 router.patch("/:id/task/:task", service.updateTask);
 router.post("/:id/task", service.newTask);
 
-// router.post("/:id/add-user", service.addUsertoProject);
-// router.post("/:id/remove-user", service.removeUserFromProject);
-
 router.post("/remove", service.remove);
 router.get("/:id", service.findOne);
 router.patch("/:id", service.update);

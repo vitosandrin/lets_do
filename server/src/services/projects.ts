@@ -261,62 +261,6 @@ class Projects {
       response(res, 502);
     }
   };
-
-  //   addUsertoProject = async (req: Request, res: Response) => {
-  //     const { body, params } = req;
-
-  //     const user = await this.user.findOne(req, { email: body.user });
-  //     const project = await this.project.findOne(req, { _id: params.id });
-  //     if (!user) {
-  //       response(res, 404, "User not found!");
-  //       return;
-  //     }
-  //     if (!project) {
-  //       response(res, 404, "Project not found!");
-  //       return;
-  //     }
-
-  //     try {
-  //       await this.project.update(
-  //         req,
-  //         { _id: params.id },
-  //         { $push: { user: user?._id } }
-  //       );
-  //       response(res, 200, `${user?.name} added to project ${project?.name}`);
-  //     } catch (error) {
-  //       console.log(error);
-  //       response(res, 502);
-  //     }
-  //   };
-
-  //   removeUserFromProject = async (req: Request, res: Response) => {
-  //     const { params, body } = req;
-
-  //     const project = await this.project.findOne(req, { _id: params.id });
-  //     const user = await this.user.findOne(req, { email: body.user });
-
-  //     if (!project) {
-  //       response(res, 404, "Project not found!");
-  //       return;
-  //     }
-
-  //     try {
-  //       await this.project.update(
-  //         req,
-  //         { _id: params.id },
-  //         { $pull: { user: user?._id } }
-  //       );
-
-  //       response(
-  //         res,
-  //         200,
-  //         `User ${user?.name} removed from project ${project.name}`
-  //       );
-  //     } catch (error) {
-  //       console.log(error);
-  //       response(res, 502);
-  //     }
-  //   };
 }
 
 export default Projects;
