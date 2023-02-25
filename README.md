@@ -1,47 +1,34 @@
-# 💻 Lets Do App
-Uma aplicação de gerenciamento de projetos e tarefas, onde o usuário pode cadastrar seus projetos e tarefas, excluir, alterar suas informações e seu status caso tenha finalizado ou esteja em atraso.
+# 💻 Lets Do! App
+Uma aplicação fullstack Typescript de gerenciamento de projetos e tarefas onde o usuario pode se registrar, fazer login, criar novos projetos e novas tarefas, defininindo niveis de prioridade e data de entrega. 
+
+# 📜 Documentos úteis
+* Insomnia JSON com todas as requisições e payloads '/server/insomnia'
+
+# 🤹‍♀️ Como rodar o projeto
+1 - Abra o terminal no local que deseja clonar o repositório e execute o comando `git clone https://github.com/vitosandrin/lets_do.git` 
+
+2 - Abra o terminal no diretorio 'server' e execute o comando `yarn dev`
+
+3 - Abra o terminal no diretorio 'client' e execute o comando `yarn dev`
+
+4 - Abra em seu navegador o link http://localhost:5173/ e você já estará conectado ao servidor HTTP e WebSocket!
+
 ## ✨ Techs
   * Back-end:
-    -  [ ] NodeJS (express)
+    -  [ ] NodeJS
+    -  [ ] Express
     -  [ ] Typescript
     -  [ ] MongoDB
     -  [ ] Mongoose
-    -  [ ] md5
     -  [ ] Ramda
-    -  [ ] Json Web Token
   * Front-end:
     -  [ ] React
     -  [ ] Typescript
-    -  [ ] Redux Toolkit
     -  [ ] Vite
+    -  [ ] Redux-Toolkit
     -  [ ] Axios
-    -  [ ] File-Saver
     -  [ ] Styled Components
-    -  [ ] React-icons
     
 <hr />
 
-## 1 - Backend
-- Rotas de cadastro, login, exclusão e atualização do usuário.
-- Rota de criação de projetos do usuário, passando o nome do projeto e descrição do projeto.
-- Rota de criação de tarefas do usuário, passando o nome da tarefa, descrição da tarefa e status da tarefa.
-- Rota de atualização de tarefa do usuário através do id da tarefa.
-- Rota de atualização do projeto do usuário através do id do projeto.
-- 
-    ## 1.1 - Banco de dados
-    - Collection de usuário
-        - name
-        - email
-        - password
-        - _id
-        - createdAt
-        - updatedAt
-    - Collection de projeto
-        - name
-        - description
-        - createdAt
-        - updatedAt
-        - user
-        - tasks[{name, description, completed}]
-     
     
